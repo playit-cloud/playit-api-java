@@ -1,0 +1,2733 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "playit.gg's api",
+    "version": "unstable"
+  },
+  "servers": [
+    {
+      "url": "https://api.playit.gg"
+    }
+  ],
+  "paths": {
+    "/tunnels/create": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReqTunnelsCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ObjectId"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "error"
+                          ]
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "validation"
+                              ]
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "message"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "fail"
+                          ]
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/TunnelCreateError"
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AuthError"
+          },
+          "500": {
+            "$ref": "#/components/responses/AppInternalError"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": []
+          },
+          {
+            "AgentKey": []
+          }
+        ]
+      }
+    },
+    "/tunnels/delete": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReqTunnelsDelete"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "error"
+                          ]
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "validation"
+                              ]
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "message"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AuthError"
+          },
+          "500": {
+            "$ref": "#/components/responses/AppInternalError"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": []
+          },
+          {
+            "AgentKey": []
+          }
+        ]
+      }
+    },
+    "/claim/details": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReqClaimDetails"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/AgentClaimDetails"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "error"
+                          ]
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "validation"
+                              ]
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "message"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "fail"
+                          ]
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/ClaimDetailsError"
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AuthError"
+          },
+          "500": {
+            "$ref": "#/components/responses/AppInternalError"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ]
+      }
+    },
+    "/claim/setup": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReqClaimSetup"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ClaimSetupResponse"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "error"
+                          ]
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "validation"
+                              ]
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "message"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "fail"
+                          ]
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/ClaimSetupError"
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AuthError"
+          },
+          "500": {
+            "$ref": "#/components/responses/AppInternalError"
+          }
+        }
+      }
+    },
+    "/claim/exchange": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReqClaimExchange"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/AgentSecretKey"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "error"
+                          ]
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "validation"
+                              ]
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "message"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "fail"
+                          ]
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/ClaimExchangeError"
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AuthError"
+          },
+          "500": {
+            "$ref": "#/components/responses/AppInternalError"
+          }
+        }
+      }
+    },
+    "/claim/accept": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReqClaimAccept"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/AgentAccepted"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "error"
+                          ]
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "validation"
+                              ]
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "message"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "fail"
+                          ]
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/ClaimAcceptError"
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AuthError"
+          },
+          "500": {
+            "$ref": "#/components/responses/AppInternalError"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ]
+      }
+    },
+    "/claim/reject": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReqClaimReject"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "error"
+                          ]
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "validation"
+                              ]
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "message"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "fail"
+                          ]
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/ClaimRejectError"
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AuthError"
+          },
+          "500": {
+            "$ref": "#/components/responses/AppInternalError"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ]
+      }
+    },
+    "/proto/register": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReqProtoRegister"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/SignedAgentKey"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "error"
+                          ]
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "validation"
+                              ]
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "message"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AuthError"
+          },
+          "500": {
+            "$ref": "#/components/responses/AppInternalError"
+          }
+        },
+        "security": [
+          {
+            "AgentKey": []
+          }
+        ]
+      }
+    },
+    "/login/guest": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/WebSession"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "error"
+                          ]
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "validation"
+                              ]
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "message"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AuthError"
+          },
+          "500": {
+            "$ref": "#/components/responses/AppInternalError"
+          }
+        },
+        "security": [
+          {
+            "AgentKey": []
+          }
+        ]
+      }
+    },
+    "/agents/routing/get": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReqAgentsRoutingGet"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/AgentRouting"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "error"
+                          ]
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "validation"
+                              ]
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "message"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "fail"
+                          ]
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/AgentRoutingGetError"
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AuthError"
+          },
+          "500": {
+            "$ref": "#/components/responses/AppInternalError"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": []
+          },
+          {
+            "AgentKey": []
+          }
+        ]
+      }
+    },
+    "/agents/rundata": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/AgentRunData"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "error"
+                          ]
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "validation"
+                              ]
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "message"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AuthError"
+          },
+          "500": {
+            "$ref": "#/components/responses/AppInternalError"
+          }
+        },
+        "security": [
+          {
+            "AgentKey": []
+          }
+        ]
+      }
+    },
+    "/tunnels/list": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReqTunnelsList"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/AccountTunnels"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "error"
+                          ]
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "validation"
+                              ]
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "message"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "data"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AuthError"
+          },
+          "500": {
+            "$ref": "#/components/responses/AppInternalError"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": []
+          },
+          {
+            "AgentKey": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      },
+      "AgentKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    },
+    "responses": {
+      "AppInternalError": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ]
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "internal"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ]
+                }
+              },
+              "required": [
+                "status",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "AuthError": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ]
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "auth"
+                      ]
+                    },
+                    "message": {
+                      "$ref": "#/components/schemas/AuthError"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "message"
+                  ]
+                }
+              },
+              "required": [
+                "status",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ReqLoginGuest": {
+        "type": "object"
+      },
+      "DateTimeUtc": {
+        "type": "string"
+      },
+      "TunnelDomain": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "is_external": {
+            "$ref": "#/components/schemas/bool"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "source": {
+            "$ref": "#/components/schemas/TunnelDomainSource"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "is_external",
+          "source"
+        ]
+      },
+      "SignedEpoch": {
+        "type": "object",
+        "properties": {
+          "epoch_sec": {
+            "$ref": "#/components/schemas/u32"
+          }
+        },
+        "required": [
+          "epoch_sec"
+        ]
+      },
+      "TunnelType": {
+        "type": "string",
+        "enum": [
+          "minecraft-java",
+          "minecraft-bedrock",
+          "valheim",
+          "terraria",
+          "starbound",
+          "rust",
+          "7days",
+          "unturned"
+        ]
+      },
+      "WebSession": {
+        "type": "object",
+        "properties": {
+          "session_key": {
+            "type": "string"
+          },
+          "auth": {
+            "$ref": "#/components/schemas/WebAuth"
+          }
+        },
+        "required": [
+          "session_key",
+          "auth"
+        ]
+      },
+      "TunnelCreateError": {
+        "type": "string",
+        "enum": [
+          "AgentIdRequired",
+          "AgentNotFound",
+          "InvalidAgentId",
+          "DedicatedIpNotFound",
+          "DedicatedIpPortNotAvailable",
+          "DedicatedIpNotEnoughSpace",
+          "PortAllocNotFound",
+          "InvalidIpHostname",
+          "ManagedMissingAgentId"
+        ]
+      },
+      "ReqTunnelsCreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tunnel_type": {
+            "$ref": "#/components/schemas/TunnelType"
+          },
+          "port_type": {
+            "$ref": "#/components/schemas/PortType"
+          },
+          "port_count": {
+            "$ref": "#/components/schemas/u16"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/TunnelOriginCreate"
+          },
+          "enabled": {
+            "$ref": "#/components/schemas/bool"
+          },
+          "alloc": {
+            "$ref": "#/components/schemas/TunnelCreateUseAllocation"
+          },
+          "firewall_id": {
+            "$ref": "#/components/schemas/Uuid"
+          }
+        },
+        "required": [
+          "port_type",
+          "port_count",
+          "origin",
+          "enabled"
+        ]
+      },
+      "ReqClaimDetails": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "AgentType": {
+        "type": "string",
+        "enum": [
+          "default",
+          "assignable",
+          "self-managed"
+        ]
+      },
+      "AllocationRegion": {
+        "type": "string",
+        "enum": [
+          "smart-global",
+          "global",
+          "north-america",
+          "europe",
+          "asia",
+          "india",
+          "south-america"
+        ]
+      },
+      "ReqClaimReject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "WebAuth": {
+        "type": "object",
+        "properties": {
+          "update_version": {
+            "$ref": "#/components/schemas/u32"
+          },
+          "account_id": {
+            "$ref": "#/components/schemas/u64"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/u64"
+          },
+          "account_status": {
+            "$ref": "#/components/schemas/AccountStatus"
+          },
+          "totp_status": {
+            "$ref": "#/components/schemas/TotpStatus"
+          },
+          "admin_id": {
+            "$ref": "#/components/schemas/u64"
+          }
+        },
+        "required": [
+          "update_version",
+          "account_id",
+          "timestamp",
+          "account_status",
+          "totp_status"
+        ]
+      },
+      "u32": {
+        "type": "number"
+      },
+      "TunnelDisabledReason": {
+        "type": "string",
+        "enum": [
+          "requires-premium",
+          "over-port-limit",
+          "ip-used-in-gre"
+        ]
+      },
+      "ReqAgentsRoutingGet": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "$ref": "#/components/schemas/Uuid"
+          }
+        }
+      },
+      "UseAllocDedicatedIp": {
+        "type": "object",
+        "properties": {
+          "ip_hostname": {
+            "type": "string"
+          },
+          "port": {
+            "$ref": "#/components/schemas/u16"
+          }
+        },
+        "required": [
+          "ip_hostname"
+        ]
+      },
+      "ReqClaimExchange": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "ReqTunnelsDelete": {
+        "type": "object",
+        "properties": {
+          "tunnel_id": {
+            "$ref": "#/components/schemas/Uuid"
+          }
+        },
+        "required": [
+          "tunnel_id"
+        ]
+      },
+      "ClaimSetupError": {
+        "type": "string",
+        "enum": [
+          "InvalidCode",
+          "CodeExpired",
+          "VersionTextTooLong"
+        ]
+      },
+      "u64": {
+        "type": "number"
+      },
+      "AgentSecretKey": {
+        "type": "object",
+        "properties": {
+          "secret_key": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "secret_key"
+        ]
+      },
+      "AgentPendingTunnel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "proto": {
+            "$ref": "#/components/schemas/PortType"
+          },
+          "port_count": {
+            "$ref": "#/components/schemas/u16"
+          },
+          "tunnel_type": {
+            "type": "string"
+          },
+          "is_disabled": {
+            "$ref": "#/components/schemas/bool"
+          }
+        },
+        "required": [
+          "id",
+          "proto",
+          "port_count",
+          "is_disabled"
+        ]
+      },
+      "TunnelAssignment": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "dedicated-ip"
+                ]
+              },
+              "subscription": {
+                "$ref": "#/components/schemas/TunnelDedicatedIp"
+              }
+            },
+            "required": [
+              "type",
+              "subscription"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "dedicated-port"
+                ]
+              },
+              "subscription": {
+                "$ref": "#/components/schemas/SubscriptionId"
+              }
+            },
+            "required": [
+              "type",
+              "subscription"
+            ]
+          }
+        ]
+      },
+      "AssignedManaged": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "agent_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "agent_id",
+          "agent_name"
+        ]
+      },
+      "TotpStatus": {
+        "oneOf": [
+          {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SignedEpoch"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "signed"
+                    ]
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "ClaimAcceptError": {
+        "type": "string",
+        "enum": [
+          "InvalidCode",
+          "AgentNotReady",
+          "CodeNotFound",
+          "InvalidAgentType",
+          "ClaimAlreadyAccepted",
+          "ClaimRejected",
+          "CodeExpired",
+          "InvalidName"
+        ]
+      },
+      "ClaimRejectError": {
+        "type": "string",
+        "enum": [
+          "InvalidCode",
+          "CodeNotFound",
+          "ClaimAccepted",
+          "ClaimAlreadyRejected"
+        ]
+      },
+      "Platform": {
+        "type": "string",
+        "enum": [
+          "linux",
+          "freebsd",
+          "windows",
+          "macos",
+          "android",
+          "ios",
+          "minecraft-plugin",
+          "unknown"
+        ]
+      },
+      "AssignedDefaultCreate": {
+        "type": "object",
+        "properties": {
+          "local_ip": {
+            "$ref": "#/components/schemas/IpAddr"
+          },
+          "local_port": {
+            "$ref": "#/components/schemas/u16"
+          }
+        },
+        "required": [
+          "local_ip"
+        ]
+      },
+      "TunnelDomainSource": {
+        "type": "string",
+        "enum": [
+          "from-ip",
+          "from-tunnel",
+          "from-agent-ip"
+        ]
+      },
+      "TunnelExpireNotice": {
+        "type": "object",
+        "properties": {
+          "disable_at": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "remove_at": {
+            "$ref": "#/components/schemas/DateTime"
+          }
+        },
+        "required": [
+          "disable_at",
+          "remove_at"
+        ]
+      },
+      "u16": {
+        "type": "number"
+      },
+      "ClaimExchangeError": {
+        "type": "string",
+        "enum": [
+          "CodeNotFound",
+          "CodeExpired",
+          "UserRejected",
+          "NotAccepted",
+          "NotSetup"
+        ]
+      },
+      "PortRange": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "$ref": "#/components/schemas/u16"
+          },
+          "to": {
+            "$ref": "#/components/schemas/u16"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ]
+      },
+      "IpAddr": {
+        "type": "string"
+      },
+      "ClaimDetailsError": {
+        "type": "string",
+        "enum": [
+          "AlreadyClaimed",
+          "AlreadyRejected",
+          "ClaimExpired",
+          "DifferentOwner",
+          "WaitingForAgent",
+          "InvalidCode"
+        ]
+      },
+      "TunnelDisabled": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "$ref": "#/components/schemas/TunnelDisabledReason"
+          }
+        },
+        "required": [
+          "reason"
+        ]
+      },
+      "AssignedAgent": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "agent_name": {
+            "type": "string"
+          },
+          "local_ip": {
+            "$ref": "#/components/schemas/IpAddr"
+          },
+          "local_port": {
+            "$ref": "#/components/schemas/u16"
+          }
+        },
+        "required": [
+          "agent_id",
+          "agent_name",
+          "local_ip"
+        ]
+      },
+      "AgentRunData": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "agent_type": {
+            "$ref": "#/components/schemas/AgentType"
+          },
+          "account_status": {
+            "$ref": "#/components/schemas/AgentAccountStatus"
+          },
+          "tunnels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentTunnel"
+            }
+          },
+          "pending": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentPendingTunnel"
+            }
+          }
+        },
+        "required": [
+          "agent_id",
+          "agent_type",
+          "account_status",
+          "tunnels",
+          "pending"
+        ]
+      },
+      "Ipv6Addr": {
+        "type": "string"
+      },
+      "ClaimSetupResponse": {
+        "type": "string",
+        "enum": [
+          "WaitingForUserVisit",
+          "WaitingForUser",
+          "UserAccepted",
+          "UserRejected"
+        ]
+      },
+      "PlayitAgentVersion": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "$ref": "#/components/schemas/AgentVersion"
+          },
+          "official": {
+            "$ref": "#/components/schemas/bool"
+          },
+          "details_website": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "official"
+        ]
+      },
+      "AccountTunnel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "tunnel_type": {
+            "$ref": "#/components/schemas/TunnelType"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "name": {
+            "type": "string"
+          },
+          "port_type": {
+            "$ref": "#/components/schemas/PortType"
+          },
+          "port_count": {
+            "$ref": "#/components/schemas/u16"
+          },
+          "alloc": {
+            "$ref": "#/components/schemas/AccountTunnelAllocation"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/TunnelOrigin"
+          },
+          "domain": {
+            "$ref": "#/components/schemas/TunnelDomain"
+          },
+          "firewall_id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "ratelimit": {
+            "$ref": "#/components/schemas/Ratelimit"
+          },
+          "active": {
+            "$ref": "#/components/schemas/bool"
+          },
+          "disabled_reason": {
+            "$ref": "#/components/schemas/TunnelDisabledReason"
+          },
+          "region": {
+            "$ref": "#/components/schemas/AllocationRegion"
+          },
+          "expire_notice": {
+            "$ref": "#/components/schemas/TunnelExpireNotice"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "port_type",
+          "port_count",
+          "alloc",
+          "origin",
+          "ratelimit",
+          "active"
+        ]
+      },
+      "SubscriptionId": {
+        "type": "object",
+        "properties": {
+          "sub_id": {
+            "$ref": "#/components/schemas/Uuid"
+          }
+        },
+        "required": [
+          "sub_id"
+        ]
+      },
+      "TunnelDedicatedIp": {
+        "type": "object",
+        "properties": {
+          "sub_id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "region": {
+            "$ref": "#/components/schemas/AllocationRegion"
+          }
+        },
+        "required": [
+          "sub_id",
+          "region"
+        ]
+      },
+      "DateTime": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "AgentTunnelDisabled": {
+        "type": "string",
+        "enum": [
+          "ByUser",
+          "BySystem"
+        ]
+      },
+      "AgentRoutingGetError": {
+        "type": "string",
+        "enum": [
+          "MissingAgentId",
+          "AgentIdNotSupported",
+          "InvalidAgentId"
+        ]
+      },
+      "Ipv4Addr": {
+        "type": "string"
+      },
+      "AssignedDefault": {
+        "type": "object",
+        "properties": {
+          "local_ip": {
+            "$ref": "#/components/schemas/IpAddr"
+          },
+          "local_port": {
+            "$ref": "#/components/schemas/u16"
+          }
+        },
+        "required": [
+          "local_ip"
+        ]
+      },
+      "SocketAddr": {
+        "type": "string"
+      },
+      "SignedAgentKey": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "key"
+        ]
+      },
+      "AgentClaimDetails": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "remote_ip": {
+            "$ref": "#/components/schemas/IpAddr"
+          },
+          "agent_type": {
+            "$ref": "#/components/schemas/AgentType"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "remote_ip",
+          "agent_type",
+          "version"
+        ]
+      },
+      "AccountTunnels": {
+        "type": "object",
+        "properties": {
+          "tcp_alloc": {
+            "$ref": "#/components/schemas/AllocatedPorts"
+          },
+          "udp_alloc": {
+            "$ref": "#/components/schemas/AllocatedPorts"
+          },
+          "tunnels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountTunnel"
+            }
+          }
+        },
+        "required": [
+          "tcp_alloc",
+          "udp_alloc",
+          "tunnels"
+        ]
+      },
+      "AllocatedPorts": {
+        "type": "object",
+        "properties": {
+          "allowed": {
+            "$ref": "#/components/schemas/u32"
+          },
+          "claimed": {
+            "$ref": "#/components/schemas/u32"
+          },
+          "desired": {
+            "$ref": "#/components/schemas/u32"
+          }
+        },
+        "required": [
+          "allowed",
+          "claimed",
+          "desired"
+        ]
+      },
+      "AccountStatus": {
+        "type": "string",
+        "enum": [
+          "guest",
+          "email-not-verified",
+          "verified"
+        ]
+      },
+      "ObjectId": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "AgentAccountStatus": {
+        "type": "string",
+        "enum": [
+          "account-delete-scheduled",
+          "banned",
+          "has-message",
+          "email-not-verified",
+          "guest",
+          "ready",
+          "agent-over-limit",
+          "agent-disabled"
+        ]
+      },
+      "bool": {
+        "type": "boolean"
+      },
+      "String": {
+        "type": "string"
+      },
+      "DeleteError": {
+        "type": "string",
+        "enum": [
+          "TunnelNotFound"
+        ]
+      },
+      "ReqClaimAccept": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "agent_type": {
+            "$ref": "#/components/schemas/AgentType"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "agent_type"
+        ]
+      },
+      "AgentAccepted": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "$ref": "#/components/schemas/Uuid"
+          }
+        },
+        "required": [
+          "agent_id"
+        ]
+      },
+      "AuthError": {
+        "type": "string",
+        "enum": [
+          "AuthRequired",
+          "InvalidHeader",
+          "InvalidSignature",
+          "InvalidTimestamp",
+          "InvalidApiKey",
+          "InvalidAgentKey",
+          "SessionExpired",
+          "InvalidAuthType",
+          "ScopeNotAllowed",
+          "NoLongerValid",
+          "GuestAccountNotAllowed",
+          "EmailMustBeVerified",
+          "AccountDoesNotExist",
+          "AdminOnly",
+          "InvalidToken",
+          "TotpRequred"
+        ]
+      },
+      "GuestLoginError": {
+        "type": "string",
+        "enum": [
+          "AccountIsNotGuest"
+        ]
+      },
+      "AgentTunnel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "ip_num": {
+            "$ref": "#/components/schemas/u64"
+          },
+          "region_num": {
+            "$ref": "#/components/schemas/u16"
+          },
+          "port": {
+            "$ref": "#/components/schemas/PortRange"
+          },
+          "proto": {
+            "$ref": "#/components/schemas/PortType"
+          },
+          "local_ip": {
+            "$ref": "#/components/schemas/IpAddr"
+          },
+          "local_port": {
+            "$ref": "#/components/schemas/u16"
+          },
+          "tunnel_type": {
+            "type": "string"
+          },
+          "assigned_domain": {
+            "type": "string"
+          },
+          "custom_domain": {
+            "type": "string"
+          },
+          "disabled": {
+            "$ref": "#/components/schemas/AgentTunnelDisabled"
+          }
+        },
+        "required": [
+          "id",
+          "ip_num",
+          "region_num",
+          "port",
+          "proto",
+          "local_ip",
+          "local_port",
+          "assigned_domain"
+        ]
+      },
+      "AssignedAgentCreate": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "local_ip": {
+            "$ref": "#/components/schemas/IpAddr"
+          },
+          "local_port": {
+            "$ref": "#/components/schemas/u16"
+          }
+        },
+        "required": [
+          "agent_id",
+          "local_ip"
+        ]
+      },
+      "Ratelimit": {
+        "type": "object",
+        "properties": {
+          "bytes_per_second": {
+            "$ref": "#/components/schemas/u32"
+          },
+          "packets_per_second": {
+            "$ref": "#/components/schemas/u32"
+          }
+        }
+      },
+      "TunnelCreateUseAllocation": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "dedicated-ip"
+                ]
+              },
+              "details": {
+                "$ref": "#/components/schemas/UseAllocDedicatedIp"
+              }
+            },
+            "required": [
+              "type",
+              "details"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "port-allocation"
+                ]
+              },
+              "details": {
+                "$ref": "#/components/schemas/UseAllocPortAlloc"
+              }
+            },
+            "required": [
+              "type",
+              "details"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "region"
+                ]
+              },
+              "details": {
+                "$ref": "#/components/schemas/UseRegion"
+              }
+            },
+            "required": [
+              "type",
+              "details"
+            ]
+          }
+        ]
+      },
+      "AgentVersion": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "$ref": "#/components/schemas/Platform"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "platform",
+          "version"
+        ]
+      },
+      "AccountTunnelAllocation": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "disabled"
+                ]
+              },
+              "data": {
+                "$ref": "#/components/schemas/TunnelDisabled"
+              }
+            },
+            "required": [
+              "status",
+              "data"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "allocated"
+                ]
+              },
+              "data": {
+                "$ref": "#/components/schemas/TunnelAllocated"
+              }
+            },
+            "required": [
+              "status",
+              "data"
+            ]
+          }
+        ]
+      },
+      "TunnelOriginCreate": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "default"
+                ]
+              },
+              "data": {
+                "$ref": "#/components/schemas/AssignedDefaultCreate"
+              }
+            },
+            "required": [
+              "type",
+              "data"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "agent"
+                ]
+              },
+              "data": {
+                "$ref": "#/components/schemas/AssignedAgentCreate"
+              }
+            },
+            "required": [
+              "type",
+              "data"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "managed"
+                ]
+              },
+              "data": {
+                "$ref": "#/components/schemas/AssignedManagedCreate"
+              }
+            },
+            "required": [
+              "type",
+              "data"
+            ]
+          }
+        ]
+      },
+      "AgentRouting": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "targets4": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ipv4Addr"
+            }
+          },
+          "targets6": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ipv6Addr"
+            }
+          }
+        },
+        "required": [
+          "agent_id",
+          "targets4",
+          "targets6"
+        ]
+      },
+      "PortType": {
+        "type": "string",
+        "enum": [
+          "tcp",
+          "udp",
+          "both"
+        ]
+      },
+      "UseRegion": {
+        "type": "object",
+        "properties": {
+          "region": {
+            "$ref": "#/components/schemas/AllocationRegion"
+          }
+        },
+        "required": [
+          "region"
+        ]
+      },
+      "IpType": {
+        "type": "string",
+        "enum": [
+          "both",
+          "ip4",
+          "ip6"
+        ]
+      },
+      "AssignedManagedCreate": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "$ref": "#/components/schemas/Uuid"
+          }
+        }
+      },
+      "UseAllocPortAlloc": {
+        "type": "object",
+        "properties": {
+          "alloc_id": {
+            "$ref": "#/components/schemas/Uuid"
+          }
+        },
+        "required": [
+          "alloc_id"
+        ]
+      },
+      "Uuid": {
+        "type": "string"
+      },
+      "ReqAgentsRundata": {
+        "type": "object"
+      },
+      "TunnelOrigin": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "default"
+                ]
+              },
+              "data": {
+                "$ref": "#/components/schemas/AssignedDefault"
+              }
+            },
+            "required": [
+              "type",
+              "data"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "agent"
+                ]
+              },
+              "data": {
+                "$ref": "#/components/schemas/AssignedAgent"
+              }
+            },
+            "required": [
+              "type",
+              "data"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "managed"
+                ]
+              },
+              "data": {
+                "$ref": "#/components/schemas/AssignedManaged"
+              }
+            },
+            "required": [
+              "type",
+              "data"
+            ]
+          }
+        ]
+      },
+      "ReqClaimSetup": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "agent_type": {
+            "$ref": "#/components/schemas/AgentType"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "agent_type",
+          "version"
+        ]
+      },
+      "TunnelAllocated": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "ip_hostname": {
+            "type": "string"
+          },
+          "static_ip4": {
+            "$ref": "#/components/schemas/Ipv4Addr"
+          },
+          "assigned_domain": {
+            "type": "string"
+          },
+          "assigned_srv": {
+            "type": "string"
+          },
+          "tunnel_ip": {
+            "$ref": "#/components/schemas/IpAddr"
+          },
+          "port_start": {
+            "$ref": "#/components/schemas/u16"
+          },
+          "port_end": {
+            "$ref": "#/components/schemas/u16"
+          },
+          "assignment": {
+            "$ref": "#/components/schemas/TunnelAssignment"
+          },
+          "ip_type": {
+            "$ref": "#/components/schemas/IpType"
+          },
+          "region": {
+            "$ref": "#/components/schemas/AllocationRegion"
+          }
+        },
+        "required": [
+          "id",
+          "ip_hostname",
+          "assigned_domain",
+          "tunnel_ip",
+          "port_start",
+          "port_end",
+          "assignment",
+          "ip_type",
+          "region"
+        ]
+      },
+      "ReqProtoRegister": {
+        "type": "object",
+        "properties": {
+          "agent_version": {
+            "$ref": "#/components/schemas/PlayitAgentVersion"
+          },
+          "client_addr": {
+            "$ref": "#/components/schemas/SocketAddr"
+          },
+          "tunnel_addr": {
+            "$ref": "#/components/schemas/SocketAddr"
+          }
+        },
+        "required": [
+          "agent_version",
+          "client_addr",
+          "tunnel_addr"
+        ]
+      },
+      "ReqTunnelsList": {
+        "type": "object",
+        "properties": {
+          "tunnel_id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "agent_id": {
+            "$ref": "#/components/schemas/Uuid"
+          }
+        }
+      }
+    }
+  }
+}

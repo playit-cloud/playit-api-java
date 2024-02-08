@@ -1,0 +1,22 @@
+
+
+# TunnelsCreatePost400ResponseOneOf1
+
+
+## Properties
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**status** | [**StatusEnum**](#StatusEnum) |  |  |
+|**data** | **TunnelCreateError** |  |  |
+
+
+
+## Enum: StatusEnum
+
+| Name | Value |
+|---- | -----|
+| FAIL | &quot;fail&quot; |
+
+
+
