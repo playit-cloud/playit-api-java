@@ -1,0 +1,48 @@
+diff --git a/src/main/java/gg/playit/ApiClient.java b/src/main/java/gg/playit/ApiClient.java
+index 0a22d9b..840836f 100644
+--- a/src/main/java/gg/playit/ApiClient.java
++++ b/src/main/java/gg/playit/ApiClient.java
+@@ -100,8 +100,15 @@ public class ApiClient {
+         initHttpClient();
+ 
+         // Setup authentications (key: authentication name, value: authentication).
+-        authentications.put("ApiKey", new ApiKeyAuth("header", "Authorization"));
+-        authentications.put("AgentKey", new ApiKeyAuth("header", "Authorization"));
++        ApiKeyAuth apiKeyAuth = new ApiKeyAuth("header", "Authorization");
++        ApiKeyAuth agentKeyAuth = new ApiKeyAuth("header", "Authorization");
++
++        apiKeyAuth.setApiKeyPrefix("Api-Key");
++        agentKeyAuth.setApiKeyPrefix("Agent-Key");
++
++        authentications.put("ApiKey", apiKeyAuth);
++        authentications.put("AgentKey", agentKeyAuth);
++
+         // Prevent the authentications from being modified.
+         authentications = Collections.unmodifiableMap(authentications);
+     }
+@@ -424,13 +431,18 @@ public class ApiClient {
+      * @param apiKey API key
+      */
+     public void setApiKey(String apiKey) {
+-        for (Authentication auth : authentications.values()) {
+-            if (auth instanceof ApiKeyAuth) {
+-                ((ApiKeyAuth) auth).setApiKey(apiKey);
+-                return;
+-            }
+-        }
+-        throw new RuntimeException("No API key authentication configured!");
++        ApiKeyAuth auth = (ApiKeyAuth) authentications.get("ApiKey");
++        auth.setApiKey(apiKey);
++    }
++
++    /**
++     * Helper method to set API key value for the first API key authentication.
++     *
++     * @param apiKey API key
++     */
++    public void setAgentKey(String agentKey) {
++        ApiKeyAuth auth = (ApiKeyAuth) authentications.get("AgentKey");
++        auth.setApiKey(agentKey);
+     }
+ 
+     /**

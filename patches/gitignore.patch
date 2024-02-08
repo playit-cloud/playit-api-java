@@ -1,0 +1,10 @@
+diff --git a/.gitignore b/.gitignore
+index a530464..972c9d4 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,4 +1,5 @@
+ *.class
++.idea/
+ 
+ # Mobile Tools for Java (J2ME)
+ .mtj.tmp/

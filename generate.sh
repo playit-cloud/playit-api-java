@@ -16,3 +16,6 @@ java -jar openapi-generator-cli.jar generate \
   --additional-properties developerOrganizationUrl="https://methods.dev" \
   --additional-properties hideGenerationTimestamp=true \
   -o ./
+
+git apply patches/gitignore.patch
+git apply patches/auth.patch
