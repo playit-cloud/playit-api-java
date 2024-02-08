@@ -14,4 +14,5 @@ java -jar openapi-generator-cli.jar generate \
   --additional-properties developerName="Patrick Lorio" \
   --additional-properties developerOrganization="Developed Methods LLC" \
   --additional-properties developerOrganizationUrl="https://methods.dev" \
+  --additional-properties hideGenerationTimestamp=true \
   -o ./
